@@ -15,7 +15,7 @@
       </tr>
     </thead>
     <tbody>
-  @for (sol of solicitudes; track sol.id) {
+  @for (sol of solicitudesPaginadas; track sol.id) {
     <tr>
       <td>#{{ sol.id }}</td>
       <td><strong>{{ sol.titulo }}</strong><br><small>{{ sol.descripcion }}</small></td>
@@ -47,5 +47,16 @@
   }
 </tbody>
   </table>
+  <div class="paginacion-bancaria">
+    <button (click)="cambiarPagina(false)" [disabled]="paginaActual === 0" class="btn-pag">
+      ◀ Anterior
+    </button>
+    <span class="info-paginacion">
+      Página <strong>{{ paginaActual + 1 }}</strong> de <strong>{{ totalPaginas || 1 }}</strong>
+    </span>
+    <button (click)="cambiarPagina(true)" [disabled]="paginaActual === totalPaginas - 1 || totalPaginas === 0" class="btn-pag">
+      Siguiente ▶
+    </button>
+  </div>
 </div>
 

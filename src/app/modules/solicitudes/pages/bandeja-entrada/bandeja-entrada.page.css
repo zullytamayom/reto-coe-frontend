@@ -17,6 +17,9 @@
   padding: 12px;
   border-bottom: 1px solid #e0e0e0;
 }
+.tabla-bancaria tbody tr { transition: background-color 0.2s; }
+.tabla-bancaria tbody tr:hover { background-color: #f8faff; cursor: pointer; }
+
 
 .tipo-tag {
   background: #e1f5fe;
