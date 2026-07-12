@@ -1,0 +1,49 @@
+<div class="contenedor-bancario form-card">
+  <h2>Crear Nueva Solicitud de Autorización Interna</h2>
+  <p class="subtitulo">Complete los campos requeridos para la evaluación del comité técnico.</p>
+
+  <div *ngIf="mensajeExito" class="alerta-exito">
+    {{ mensajeExito }}
+  </div>
+
+  <form [formGroup]="formularioBancario" (ngSubmit)="enviarSolicitud()">
+
+    <div class="campo-grupo">
+      <label>Título de la Operación <span class="requerido">*</span></label>
+      <input type="text" formControlName="titulo" placeholder="Ej: Despliegue de microservicio de pagos v1.0.4"
+             [ngClass]="{'input-error': formularioBancario.get('titulo')?.touched && formularioBancario.get('titulo')?.invalid}">
+      <small *ngIf="formularioBancario.get('titulo')?.touched && formularioBancario.get('titulo')?.errors?.['required']" class="error-txt">
+        El título es obligatorio para la auditoría bancaria.
+      </small>
+    </div>
+
+    <div class="campo-grupo">
+      <label>Tipo de Requerimiento <span class="requerido">*</span></label>
+      <select formControlName="tipoSolicitud" [ngClass]="{'input-error': formularioBancario.get('tipoSolicitud')?.touched && formularioBancario.get('tipoSolicitud')?.invalid}">
+        <option value="" disabled selected>Seleccione una opción...</option>
+        <option *ngFor="let tipo of tiposSolicitud" [value]="tipo">{{ tipo }}</option>
+      </select>
+    </div>
+
+    <div class="campo-grupo">
+      <label>Usuario Responsable de Aprobar <span class="requerido">*</span></label>
+      <input type="text" formControlName="responsable" placeholder="Ej: laura.lead"
+             [ngClass]="{'input-error': formularioBancario.get('responsable')?.touched && formularioBancario.get('responsable')?.invalid}">
+    </div>
+
+    <div class="campo-grupo">
+      <label>Descripción Técnica Detallada <span class="requerido">*</span></label>
+      <textarea formControlName="descripcion" rows="4" placeholder="Detalle los motivos, riesgos e impacto técnico..."
+                [ngClass]="{'input-error': formularioBancario.get('descripcion')?.touched && formularioBancario.get('descripcion')?.invalid}"></textarea>
+    </div>
+
+    <div class="acciones-form">
+      <button type="button" class="btn-cancelar" (click)="formularioBancario.reset()">Limpiar</button>
+      <button type="submit" class="btn-guardar" [disabled]="cargando">
+        {{ cargando ? 'Enviando...' : 'Emitir Solicitud' }}
+      </button>
+    </div>
+
+  </form>
+</div>
+
