@@ -1,7 +1,9 @@
-import { Component, OnInit, ChangeDetectorRef} from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SolicitudService } from '../../../../data/services/solicitud.service';
+import { NotificacionService } from '../../../../data/services/notificacion.service';
 import { Solicitud } from '../../../../core/models/solicitud.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-bandeja-entrada',
@@ -10,7 +12,7 @@ import { Solicitud } from '../../../../core/models/solicitud.model';
   templateUrl: './bandeja-entrada.page.html',
   styleUrls: ['./bandeja-entrada.page.css']
 })
-export class BandejaEntradaPage implements OnInit {
+export class BandejaEntradaPage implements OnInit, OnDestroy {
   solicitudes: Solicitud[] = [];
   solicitudesPaginadas: Solicitud[] = [];
   usuarioActual: string = 'laura.lead';
@@ -19,12 +21,28 @@ export class BandejaEntradaPage implements OnInit {
   registrosPorPagina: number = 5;
   totalPaginas: number = 1;
 
+  private sseSubscription!: Subscription;
+
   constructor(private solicitudService: SolicitudService,
+    private notificacionService: NotificacionService,
     private cdr: ChangeDetectorRef ) {}
 
   ngOnInit(): void {
     this.cargarSolicitudes();
+    this.escucharNotificacionesSse();
   }
+
+  escucharNotificacionesSse(): void {
+    this.sseSubscription = this.notificacionService.obtenerAlertasEnVivo().subscribe({
+      next: (notificacion) => {
+        console.log('🔔 Alerta en vivo capturada en la Bandeja:', notificacion);
+
+        this.cargarSolicitudes();
+      },
+      error: (err) => console.error('Error en el flujo SSE del componente:', err)
+    });
+  }
+
 
   cargarSolicitudes(): void {
     this.solicitudService.listarSolicitudes().subscribe({
@@ -69,6 +87,11 @@ export class BandejaEntradaPage implements OnInit {
       this.solicitudService.aprobarSolicitud(id, request).subscribe(() => this.cargarSolicitudes());
     } else {
       this.solicitudService.rechazarSolicitud(id, request).subscribe(() => this.cargarSolicitudes());
+    }
+  }
+  ngOnDestroy(): void {
+    if (this.sseSubscription) {
+      this.sseSubscription.unsubscribe();
     }
   }
 }
