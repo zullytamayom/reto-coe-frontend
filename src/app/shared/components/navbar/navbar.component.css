@@ -1,0 +1,40 @@
+.navbar-bancario {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #002F6C;
+  padding: 0 30px;
+  height: 70px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.nav-izquierdo, .nav-derecho { display: flex; align-items: center; gap: 40px; }
+
+.logo-banco { display: flex; align-items: center; gap: 12px; color: white; }
+.icono-banco { font-size: 1.8em; }
+.texto-logo { display: flex; flex-direction: column; }
+.banco-nombre { font-weight: 800; font-size: 1.05em; letter-spacing: 1px; }
+.banco-sub { font-size: 0.75em; color: #8ba2ff; font-weight: 500; }
+
+.nav-enlaces { display: flex; list-style: none; gap: 20px; margin: 0; padding: 0; }
+.nav-enlaces a {
+  color: #c4d4f2;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95em;
+  padding: 8px 16px;
+  border-radius: 4px;
+  transition: all 0.25s ease;
+}
+.nav-enlaces a:hover { color: white; background: rgba(255, 255, 255, 0.08); }
+.enlace-activo { color: white !important; background: #001f4d !important; box-shadow: inset 0 -2px 0 #fff; }
+
+.perfil-usuario { display: flex; align-items: center; gap: 12px; background: rgba(255, 255, 255, 0.06); padding: 6px 14px; border-radius: 30px; border: 1px solid rgba(255, 255, 255, 0.1); }
+.info-user { display: flex; flex-direction: column; text-align: right; }
+.user-name { color: white; font-weight: 600; font-size: 0.88em; }
+.user-role { color: #a1bce6; font-size: 0.75em; }
+.user-avatar { width: 34px; height: 34px; background: #ffffff; border-radius: 50%; padding: 2px; }

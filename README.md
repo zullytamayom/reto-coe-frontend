@@ -1,59 +1,14 @@
-# RetoCoeFrontend
+# Banco TEST - Panel de Control de Autorizaciones Bancarias
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.6.
+Canal visual corporativo e intuitivo diseñado para que los auditores del banco puedan vigilar, evaluar, crear y decidir sobre las solicitudes técnicas internas en tiempo real.
 
-## Development server
+## Stack Tecnológico
+* **Angular 18/19** (Componentes Autónomos - *Standalone Components*)
+* **RxJS** (Manejo de flujos de datos asíncronos en el cliente)
+* **Sintaxis NAtiva de Flujo de Control** (`@for`, `@empty` para alto rendimiento de renderizado)
+* **EventSource API** (Consumo nativo del protocolo Server-Sent Events)
 
-To start a local development server, run:
-
-```bash
-ng serve
-```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Características UX/UI Implementadas
+* **Paginación Local en Frontend:** Optimización de renderizado en la tabla que segmenta los datos en bloques fijos de 5 filas para proteger la memoria RAM del navegador.
+* **Manejo de Estados Inmutables:** Los botones de acción de auditoría (*Aprobar/Rechazar*) se bloquean de forma definitiva en cuanto una solicitud es resuelta, mitigando el riesgo de doble procesamiento.
+* **Componente de Alertas Toast Reactivas:** Escucha en segundo plano el stream de WebFlux. Al detectar un evento de AWS SQS, salta una tarjeta animada en la esquina superior de la pantalla de forma inmediata sin necesidad de recargar la página.

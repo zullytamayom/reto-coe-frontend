@@ -1,0 +1,7 @@
+.zona-trabajo-bancaria {
+  padding: 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+  min-height: calc(100vh - 70px);
+  background-color: #f4f6f9;
+}
