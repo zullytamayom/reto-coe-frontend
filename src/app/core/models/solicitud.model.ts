@@ -4,9 +4,9 @@ export interface Solicitud {
   descripcion: string;
   solicitante: string;
   responsable: string;
-  tipoSolicitud: string;
+  tiposolicitud: string;
   estado: 'PENDIENTE' | 'APROBADO' | 'RECHAZADO';
-  fechaCreacion: string;
+  fechacreacion: string;
 }
 
 export interface AprobacionRequest {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SolicitudService } from '../../../../data/services/solicitud.service';
 import { Solicitud } from '../../../../core/models/solicitud.model';
@@ -12,9 +12,9 @@ import { Solicitud } from '../../../../core/models/solicitud.model';
 })
 export class BandejaEntradaPage implements OnInit {
   solicitudes: Solicitud[] = [];
-  usuarioActual: string = 'laura.lead'; // Simulación de usuario auditor del banco
-
-  constructor(private solicitudService: SolicitudService) {}
+  usuarioActual: string = 'laura.lead';
+  constructor(private solicitudService: SolicitudService,
+    private cdr: ChangeDetectorRef ) {}
 
   ngOnInit(): void {
     this.cargarSolicitudes();
@@ -22,7 +22,11 @@ export class BandejaEntradaPage implements OnInit {
 
   cargarSolicitudes(): void {
     this.solicitudService.listarSolicitudes().subscribe({
-      next: (data) => this.solicitudes = data,
+      next: (data)=>{
+        console.log('Datos crudos recibidos desde Spring Boot:', data);
+        this.solicitudes = data;
+        this.cdr.detectChanges();
+      },
       error: (err) => console.error('Error al conectar con el backend bancario:', err)
     });
   }

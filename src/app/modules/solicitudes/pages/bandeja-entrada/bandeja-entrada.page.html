@@ -15,27 +15,37 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let sol of solicitudes">
-        <td>#{{ sol.id }}</td>
-        <td><strong>{{ sol.titulo }}</strong><br><small>{{ sol.descripcion }}</small></td>
-        <td><code>{{ sol.solicitante }}</code></td>
-        <td><code>{{ sol.responsable }}</code></td>
-        <td><span class="tipo-tag">{{ sol.tipoSolicitud }}</span></td>
-        <td>
-          <span [ngClass]="'badge-' + sol.estado.toLowerCase()">
-            {{ sol.estado }}
-          </span>
-        </td>
-        <td>
-          <button (click)="procesarAccion(sol.id, true)" [disabled]="sol.estado !== 'PENDIENTE'" class="btn-aprobar">
-            Aprobar
-          </button>
-          <button (click)="procesarAccion(sol.id, false)" [disabled]="sol.estado !== 'PENDIENTE'" class="btn-rechazar">
-            Rechazar
-          </button>
-        </td>
-      </tr>
-    </tbody>
+  @for (sol of solicitudes; track sol.id) {
+    <tr>
+      <td>#{{ sol.id }}</td>
+      <td><strong>{{ sol.titulo }}</strong><br><small>{{ sol.descripcion }}</small></td>
+      <td><code>{{ sol.solicitante }}</code></td>
+      <td><code>{{ sol.responsable }}</code></td>
+      <!-- Validamos camelCase exacto basado en tu console.log -->
+      <td><span class="tipo-tag">{{ sol.tiposolicitud }}</span></td>
+      <td>
+        <!-- Forzamos un estilo estándar para comprobar que pinte la celda -->
+        <span class="badge-pendiente">
+          {{ sol.estado }}
+        </span>
+      </td>
+      <td>
+        <button (click)="procesarAccion(sol.id, true)" [disabled]="sol.estado !== 'PENDIENTE'" class="btn-aprobar">
+          Aprobar
+        </button>
+        <button (click)="procesarAccion(sol.id, false)" [disabled]="sol.estado !== 'PENDIENTE'" class="btn-rechazar">
+          Rechazar
+        </button>
+      </td>
+    </tr>
+  } @empty {
+    <tr>
+      <td colspan="7" style="text-align: center; padding: 20px; color: #666666;">
+        No se encontraron registros en el sistema.
+      </td>
+    </tr>
+  }
+</tbody>
   </table>
 </div>
 
