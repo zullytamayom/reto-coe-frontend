@@ -1,0 +1,41 @@
+<div class="contenedor-bancario">
+  <h2>Centro de Excelencia (CoE) - Panel de Control de Autorizaciones</h2>
+  <p>Sesión activa auditoría: <strong>{{ usuarioActual }}</strong></p>
+
+  <table class="tabla-bancaria">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Título de la Operación</th>
+        <th>Solicitante</th>
+        <th>Responsable</th>
+        <th>Tipo</th>
+        <th>Estado</th>
+        <th>Acciones de Auditoría</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let sol of solicitudes">
+        <td>#{{ sol.id }}</td>
+        <td><strong>{{ sol.titulo }}</strong><br><small>{{ sol.descripcion }}</small></td>
+        <td><code>{{ sol.solicitante }}</code></td>
+        <td><code>{{ sol.responsable }}</code></td>
+        <td><span class="tipo-tag">{{ sol.tipoSolicitud }}</span></td>
+        <td>
+          <span [ngClass]="'badge-' + sol.estado.toLowerCase()">
+            {{ sol.estado }}
+          </span>
+        </td>
+        <td>
+          <button (click)="procesarAccion(sol.id, true)" [disabled]="sol.estado !== 'PENDIENTE'" class="btn-aprobar">
+            Aprobar
+          </button>
+          <button (click)="procesarAccion(sol.id, false)" [disabled]="sol.estado !== 'PENDIENTE'" class="btn-rechazar">
+            Rechazar
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
