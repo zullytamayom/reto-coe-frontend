@@ -1,11 +1,12 @@
 import { Injectable, NgZone } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotificacionService {
-  private sseUrl = 'http://localhost:8080/api/notificaciones/stream'
+  private sseUrl = environment.sseUrl;
   private streamNotificaciones$ = new Subject<any>();
 
   constructor(private zone: NgZone) {
