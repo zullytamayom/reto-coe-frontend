@@ -1,6 +1,11 @@
-export const environment = {
-  production: true,
-  sseUrl: 'http://54.242.176.6',
-  apiUrl: 'http://54.242.176.6'
-};
+const isProduction = window.location.hostname.includes('amazonaws.com');
 
+export const environment = {
+  production: isProduction,
+  sseUrl: isProduction
+    ? 'http://54.242.176.6'
+    : 'http://localhost:8080/api/notificaciones/stream',
+  apiUrl: isProduction
+    ? 'http://54.242.176.6'
+    : 'http://localhost:8081/api/solicitudes'
+};

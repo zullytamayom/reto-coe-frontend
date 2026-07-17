@@ -5,7 +5,7 @@ import { Observable, Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class NotificacionService {
-  private sseUrl = 'http://localhost:8080/api/notificaciones/stream';
+  private sseUrl = 'http://54.242.176.6';
   private streamNotificaciones$ = new Subject<any>();
 
   constructor(private zone: NgZone) {

@@ -8,7 +8,7 @@ import { Solicitud, AprobacionRequest } from '../../core/models/solicitud.model'
 })
 export class SolicitudService {
 
-  private apiUrl = 'http://localhost:8081/api/solicitudes';
+private apiUrl = 'http://54.242.176.6';
 
   constructor(private http: HttpClient) {}
 
