@@ -1,0 +1,31 @@
+<nav class="navbar-bancario">
+  <div class="nav-izquierdo">
+    <div class="logo-banco">
+      <span class="icono-banco">🏛️</span>
+      <div class="texto-logo">
+        <span class="banco-nombre">BANCO TEST</span>
+        <span class="banco-sub">Centro de Excelencia</span>
+      </div>
+    </div>
+
+    <ul class="nav-enlaces">
+      <li>
+        <a routerLink="/bandeja-entrada" routerLinkActive="enlace-activo">Bandeja de Entrada</a>
+      </li>
+      <li>
+        <a routerLink="/nueva-solicitud" routerLinkActive="enlace-activo">Nueva Solicitud</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="nav-derecho">
+    <div class="perfil-usuario">
+      <div class="info-user">
+        <span class="user-name">{{ usuarioSimulado.nombre }}</span>
+        <span class="user-role">{{ usuarioSimulado.rol }}</span>
+      </div>
+      <img [src]="usuarioSimulado.avatar" alt="Avatar" class="user-avatar">
+    </div>
+  </div>
+</nav>
+

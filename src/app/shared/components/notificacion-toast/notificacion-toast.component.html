@@ -1,0 +1,20 @@
+<div class="contenedor-toasts-global">
+  @for (alerta of alertas; track alerta.id) {
+    <div class="toast-card" [class]="'toast-' + alerta.tipo">
+     <div class="toast-icono">
+  @switch (alerta.tipo) {
+    @case ('pendiente') { 📝 }
+    @case ('aprobado') { ✅ }
+    @case ('rechazado') { ❌ }
+    @default { 🔔 }
+  }
+</div>
+      <div class="toast-contenido">
+        <h4>{{ alerta.titulo }}</h4>
+        <p>{{ alerta.descripcion }}</p>
+      </div>
+    </div>
+  }
+</div>
+
+
